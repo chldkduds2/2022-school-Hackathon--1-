@@ -103,6 +103,12 @@ img {vertical-align: middle;}
 }
 
 
+.title{
+  margin: 0px;
+  margin-top: 70px;
+  animation: up-down 0.5s infinite ease-in-out alternate;
+}
+
 .i{
 width: 100%;
 border-radius: 50px;

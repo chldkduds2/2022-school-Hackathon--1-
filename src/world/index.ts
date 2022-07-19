@@ -2,35 +2,43 @@ import * as THREE from 'three'
 import MaterialInfo from './Material'
 import MapInfo from './Map'
 import DeployBox from '../mesh/DeployBox'
+import { Instance } from './InstanceBox'
 export default class World {
     public worldInfo:any
     public map:MapInfo
     public materialInfo:Map<number, MaterialInfo> = new Map()
     public palette:Map<number, string>
+    private size:THREE.Vector3
     private datas:Map<string, Object> = new Map()
+    private instances:Map<number, Instance> = new Map()
     constructor(
         worldInfo:any
     ) {
         this.worldInfo = worldInfo
+        this.size = new THREE.Vector3(this.worldInfo.width, this.worldInfo.length, this.worldInfo.height)
         this.map = new MapInfo(
             this.worldInfo.blockData, 
-            new THREE.Vector3(this.worldInfo.width, this.worldInfo.length, this.worldInfo.height))
+            this.size
+        )
         this.palette = new Map(worldInfo.palette)
         this.datas = new Map(this.worldInfo.info)
-        console.log(this.worldInfo)
+        
     }
     public loadAsync():Promise<void> {
         return new Promise((resolve, reject) => {
             Promise.all(this.worldInfo.palette.map(async (element:any) => {
                 this.materialInfo.set(element[0], new MaterialInfo(element[0], element[1].name, this.loadTextureStructure('block/' + this.removeOpction(element[1].name))))
                 await this.materialInfo.get(element[0])?.setMaterial()
-            })).then(() => {resolve()})
+            })).then(() => {
+                this.worldInfo.palette.forEach((element: any) => {
+                    if(element[1].count > 4) this.instances.set(element[0], new Instance(element[0], this.materialInfo.get(element[0])?.material, element[1].count))
+                })
+                resolve()
+            })
         })
     }
     public render(scene:THREE.Scene):void {
-        console.log(this.materialInfo.get(0))
-        const box = new DeployBox(new THREE.Vector3(0, 0, 0), this.materialInfo.get(0)!.material)
-        box.render(scene)
+
     }
     private loadData(fileName:string): any {
         return this.datas.get(fileName)

@@ -19,9 +19,10 @@ export default class Dummy {
                 gltf.scene.scale.x = 0.1
                 gltf.scene.scale.y = 0.1
                 gltf.scene.scale.z = 0.1
-                this._model.position.set(0, 17, 1)
                 scene.add(gltf.scene)
                 this._model = gltf.scene
+                this._model.position.set(1, 10, 1)
+                
             },
             (u) => console.log(u),
             (e) => console.log(e)

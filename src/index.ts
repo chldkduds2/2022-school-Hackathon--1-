@@ -27,6 +27,8 @@ axios.get('/core.json')
             renderer.render(scene, camera)
         })()
 
+        
+
         world.render(scene)
         console.log("END")
     })

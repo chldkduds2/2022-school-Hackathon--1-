@@ -127,7 +127,7 @@ export default class SetModel {
         const speed = state.filter(e => true === e).length > 1 ? 0.35 : 0.5;
 
         const collusion:Array<boolean> = this.checker.update(this._camera.position)
-        console.log(collusion)
+        // console.log(collusion)
 
         if (state[0]) {
             this.pointerLockControl.moveForward(speed)
@@ -190,7 +190,7 @@ export default class SetModel {
         this._model.position.x = this._camera.position.x
         this._model.position.y = this._camera.position.y - 1
         this._model.position.z = this._camera.position.z;
-        
+
         // if (flag){
         //     this.previousLocation = this._camera.position
         //     console.log("save",this.previousLocation)

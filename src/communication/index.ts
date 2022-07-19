@@ -19,8 +19,19 @@ export default class Communication {
         });
 
         this.socket.on("login", (data) => {
-            this.others.set(data, new Dummy(scene, data))
+            this.others.set(data.name, new Dummy(scene, data.name))
+        });
+        this.socket.on("all", (data) => {
             console.log(data)
+            this.others.set(data.name, new Dummy(scene, data.name))
+        });
+        this.socket.on("move", (data) => {
+            this.others.get(data.name)?.update(data.pos)
+        });
+
+        this.socket.on("logout", (data) => {
+            this.others.get(data.name)
+            this.others.delete(data.name)
         });
     }
 

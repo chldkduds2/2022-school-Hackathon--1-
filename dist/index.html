@@ -9,11 +9,31 @@
                 overflow: hidden;
                 margin: 0px;
             }
+            #modal {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.7);
+            }
+            #cross-hair {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                user-select: none;
+                font-size: 3rem;
+                color: white;
+            }
         </style>
     </head>
 
     <body>
         <script type="module" src="bundle.js"></script>
-        <div id="three-js container"></div>
+        <div id="three-js container">
+            <div id="modal"></div>
+            <div id="cross-hair">
+                +
+            </div>
+        </div>
     </body>
 </html>

@@ -76,10 +76,11 @@ export default class Material {
     private async getMeshBasicMaterial(texture: string):Promise<THREE.MeshBasicMaterial> {
         const loadedTexture = await this.loadTexture(Material.removeString(texture, "minecraft:"))
         loadedTexture.magFilter = THREE.NearestFilter
+        
         return new THREE.MeshBasicMaterial({
             map: loadedTexture,
             transparent: true,
-            color: new THREE.Color(1, 1, 1)
+            color: green.includes(texture.substring(6)) ? new THREE.Color(0.2, 0.8, 0.2) : new THREE.Color(1, 1, 1)
         })
     }
     public async loadTexture(texture: string):Promise<THREE.Texture> {
@@ -103,7 +104,6 @@ export default class Material {
         })
         return Material.copyObj(allTexture)
     }
-
     private static setDirectiry(name:string):string {
         return Material.textureDirectory + name + Material.textureExtension
     }

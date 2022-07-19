@@ -21,7 +21,7 @@ light.addLight(scene)
     renderer.render(scene, camera)
 })()
 
-axios.get('/dormitory.json')
+axios.get('/small.json')
 .then((response) => {
     const world:World = new World(response.data)
     world.loadAsync().then(() => {

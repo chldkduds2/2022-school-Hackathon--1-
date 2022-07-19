@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
+import Checker from './Checker'
+import World from '../world'
 
 export default class SetModel {
     private _camera: THREE.Camera
@@ -14,14 +16,22 @@ export default class SetModel {
 
     private _scene:THREE.Scene;
 
-    constructor(scene: THREE.Scene, camera: THREE.Camera, divContainer: HTMLElement) {
-        // 레이케스터
+    private counter = 0;
+
+
+    private checker:Checker
+    constructor(
+        scene: THREE.Scene, 
+        camera: THREE.Camera, 
+        divContainer: HTMLElement,
+        world:World
+    ) {
         this._scene = scene
         this._camera = camera
         this._divContainer = divContainer
         this._modal = document.getElementById('modal')!
         this.pointerLockControl = new PointerLockControls(this._camera, this._divContainer)
-
+        this.checker = new Checker(world)
         const loader = new GLTFLoader()
         // loader.load(
         //     'assets/scene.gltf',
@@ -110,7 +120,8 @@ export default class SetModel {
 
         // true가 2개 이상일 때 속도 변경
         const speed = state.filter(e => true === e).length > 1 ? 0.2 : 0.5;
-        
+
+        const collusion:Array<boolean> = this.checker.update(this._camera.position)
 
         if (state[0]) {
             this.pointerLockControl.moveForward(speed)
@@ -127,14 +138,16 @@ export default class SetModel {
         if (state[4]) {
             this._camera.position.y += speed
         }
-        if (state[5]) {
-            this._camera.position.y -= speed
+        if (state[5] || collusion[5]) {
+            this._camera.position.y -= 0.1
         }
+
+
 
         this._model.position.x = this._camera.position.x
         this._model.position.y = this._camera.position.y - 1
         this._model.position.z = this._camera.position.z;
 
-
+        
     }
 }

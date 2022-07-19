@@ -46,60 +46,118 @@ export default class SetModel {
         })
 
         window.addEventListener('keydown', (e) => {
-            this.changeState(e.keyCode)
+            this.changeTrue(e.keyCode)
         })
 
         window.addEventListener('keyup', (e) => {
-            this.changeState(e.keyCode)
+            this.changeFalse(e.keyCode)
         })
     }
 
-    changeState(keyCode: number) {
-        if (keyCode == 119 || keyCode == 87) {
-            // w
-            this._state[0] = !this._state[0]
+    changeTrue(keyCode:number){
+        if (keyCode == 119 || keyCode == 87){
+            this._state[0] = true;
         }
         if (keyCode == 65 || keyCode == 97) {
-            // a
-            this._state[1] = !this._state[1]
+            this._state[1] = true;
         }
         if (keyCode == 68 || keyCode == 100) {
-            // d
-            this._state[2] = !this._state[2]
+            this._state[2] = true;
         }
         if (keyCode == 83 || keyCode == 115) {
-            //s
-            this._state[3] = !this._state[3]
+            this._state[3] = true;
         }
         if (keyCode == 32) {
-            // space
-            this._state[4] = !this._state[4]
+            this._state[4] = true;
         }
         if (keyCode == 16) {
-            // shitf
-            this._state[5] = !this._state[5]
+            this._state[5] = true;
         }
     }
 
+    changeFalse(keyCode:number){
+        if (keyCode == 119 || keyCode == 87){
+            this._state[0] = false;
+        }
+        if (keyCode == 65 || keyCode == 97) {
+            this._state[1] = false;
+        }
+        if (keyCode == 68 || keyCode == 100) {
+            this._state[2] = false;
+        }
+        if (keyCode == 83 || keyCode == 115) {
+            this._state[3] = false;
+        }
+        if (keyCode == 32) {
+            this._state[4] = false;
+        }
+        if (keyCode == 16) {
+            this._state[5] = false;
+        }
+    }
+
+
+
+    // changeState(keyCode: number, down:boolean) {
+    //     if (keyCode == 119 || keyCode == 87) {
+    //         if (down){
+    //             this._state[0] = true;
+    //         } else {
+    //             this._state[0] = false;
+    //         }
+    //         this._state[1] = !this._state[1]
+    //     }
+    //     if (keyCode == 65 || keyCode == 97) {
+    //         // a
+    //         if (down){
+    //             this._state[0] = true;
+    //         } else {
+    //             this._state[1] = false;
+    //         }
+    //         // this._state[1] = !this._state[1]
+    //     }
+    //     if (keyCode == 68 || keyCode == 100) {
+    //         // d
+    //         // this._state[2] = !this._state[2]
+    //     }
+    //     if (keyCode == 83 || keyCode == 115) {
+    //         //s
+    //         // this._state[3] = !this._state[3]
+    //     }
+    //     if (keyCode == 32) {
+    //         // space
+    //         // this._state[4] = !this._state[4]
+    //     }
+    //     if (keyCode == 16) {
+    //         // shitf
+    //         // this._state[5] = !this._state[5]
+    //     }
+    // }
+
     update() {
         const state = this._state
+
+        // true가 2개 이상일 때 속도 변경
+        const speed = state.filter(e => true === e).length > 1 ? 0.2 : 0.5;
+        
+
         if (state[0]) {
-            this.pointerLockControl.moveForward(1)
+            this.pointerLockControl.moveForward(speed)
         }
         if (state[1]) {
-            this.pointerLockControl.moveRight(-1)
+            this.pointerLockControl.moveRight(-speed)
         }
         if (state[2]) {
-            this.pointerLockControl.moveRight(1)
+            this.pointerLockControl.moveRight(speed)
         }
         if (state[3]) {
-            this.pointerLockControl.moveForward(-1)
+            this.pointerLockControl.moveForward(-speed)
         }
         if (state[4]) {
-            this._camera.position.y += 1
+            this._camera.position.y += speed
         }
         if (state[5]) {
-            this._camera.position.y -= 1
+            this._camera.position.y -= speed
         }
 
         this._model.position.x = this._camera.position.x

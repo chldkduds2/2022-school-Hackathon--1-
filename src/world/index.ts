@@ -3,6 +3,9 @@ import MaterialInfo from './Material'
 import MapInfo from './Map'
 import DeployBox from '../mesh/DeployBox'
 import { Instance } from './InstanceBox'
+import Deployable from '../mesh/Deployable'
+
+import empty from '../material/empty'
 export default class World {
     public worldInfo:any
     public map:MapInfo
@@ -11,6 +14,7 @@ export default class World {
     private size:THREE.Vector3
     private datas:Map<string, Object> = new Map()
     private instances:Map<number, Instance> = new Map()
+    private blocks:Array<Deployable> = new Array()
     constructor(
         worldInfo:any
     ) {
@@ -31,15 +35,36 @@ export default class World {
                 await this.materialInfo.get(element[0])?.setMaterial()
             })).then(() => {
                 this.worldInfo.palette.forEach((element: any) => {
-                    if(element[1].count > 4) this.instances.set(element[0], new Instance(element[0], this.materialInfo.get(element[0])?.material, element[1].count))
+                    if(element[1].count > 4 && !empty.includes(this.removeOpction(element[1].name))) 
+                        this.instances.set(element[0], new Instance(element[0], this.materialInfo.get(element[0])?.material, element[1].count))
                 })
                 resolve()
             })
         })
     }
     public render(scene:THREE.Scene):void {
-
+        let counter = 0
+        for(let z = 0; z < this.size.z; z++) {
+            for(let y = 0; y < this.size.y; y++) {
+                for(let x = 0; x < this.size.x; x++) {
+                    const pos = new THREE.Vector3(x, y, z)
+                    const color:number = this.map.get(pos)
+                    const info = this.materialInfo.get(color)
+                    if(!empty.includes(info!.name)) {
+                        if(this.instances.has(color)) {
+                            this.instances.get(color)?.render(new THREE.Vector3(x, z + 1, y), scene)
+                        }
+                        else {
+                            this.blocks[counter] = new DeployBox(new THREE.Vector3(x, z + 1, y), info!.material)
+                            this.blocks[counter].render(scene)
+                            counter++
+                        }
+                    }
+                }
+            }
+        }
     }
+    
     private loadData(fileName:string): any {
         return this.datas.get(fileName)
     }

@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import green from "../material/green"
 export default class Material {
     public code:number
     public name:string
@@ -102,7 +103,6 @@ export default class Material {
         })
         return Material.copyObj(allTexture)
     }
-
 
     private static setDirectiry(name:string):string {
         return Material.textureDirectory + name + Material.textureExtension

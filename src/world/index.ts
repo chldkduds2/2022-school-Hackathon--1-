@@ -2,10 +2,12 @@ import * as THREE from 'three'
 import MaterialInfo from './Material'
 import MapInfo from './Map'
 import DeployBox from '../mesh/DeployBox'
-import { Instance } from './InstanceBox'
+import Instance from '../instance/InstanceBox'
 import Deployable from '../mesh/Deployable'
 
 import empty from '../material/empty'
+import InstanceLadder from '../instance/instanceLadder'
+import { unwatchFile } from 'fs'
 export default class World {
     public worldInfo:any
     public map:MapInfo
@@ -15,6 +17,7 @@ export default class World {
     private datas:Map<string, Object> = new Map()
     private instances:Map<number, Instance> = new Map()
     private blocks:Array<Deployable> = new Array()
+    private specialInstance:Map<string, any> = new Map()
     constructor(
         worldInfo:any
     ) {
@@ -26,7 +29,14 @@ export default class World {
         )
         this.palette = new Map(worldInfo.palette)
         this.datas = new Map(this.worldInfo.info)
-        
+        let ladder = 0
+        this.worldInfo.palette.forEach((element:any) => {
+            if(element[1].name.includes("ladder"))
+                ladder++
+            if(element[1].name.includes("ladder"))
+                console.log(this.getOpction(element[1].name))
+        })
+        this.specialInstance.set("ladder", new InstanceLadder(ladder))
     }
     public loadAsync():Promise<void> {
         return new Promise((resolve, reject) => {
@@ -35,7 +45,7 @@ export default class World {
                 await this.materialInfo.get(element[0])?.setMaterial()
             })).then(() => {
                 this.worldInfo.palette.forEach((element: any) => {
-                    if(element[1].count > 4 && !empty.includes(this.removeOpction(element[1].name))) 
+                    if(element[1].count > 4 && !empty.includes(this.removeOpction(element[1].name)))
                         this.instances.set(element[0], new Instance(element[0], this.materialInfo.get(element[0])?.material, element[1].count))
                 })
                 resolve()
@@ -50,15 +60,17 @@ export default class World {
                     const pos = new THREE.Vector3(x, y, z)
                     const color:number = this.map.get(pos)
                     const info = this.materialInfo.get(color)
-                    if(!empty.includes(info!.name)) {
-                        if(info!.name.includes("bed")) {
-                            console.log(info!.name)
+                    const noOpction = this.removeOpction(info!.name)
+                    if(!empty.includes(noOpction)) {
+                        const deploy = new THREE.Vector3(x, z + 1, y)
+                        if(this.specialInstance.has(noOpction)) {
+                            this.specialInstance.get(noOpction).render(deploy, this.getOpction(info!.name), scene)
                         }
-                        if(this.instances.has(color)) {
-                            this.instances.get(color)?.render(new THREE.Vector3(x, z + 1, y), scene)
+                        else if(this.instances.has(color)) {
+                            this.instances.get(color)?.render(deploy, scene)
                         }
                         else {
-                            this.blocks[counter] = new DeployBox(new THREE.Vector3(x, z + 1, y), info!.material)
+                            this.blocks[counter] = new DeployBox(deploy, info!.material)
                             this.blocks[counter].render(scene)
                             counter++
                         }
@@ -97,5 +109,8 @@ export default class World {
         return    name.substring(0, name.indexOf('[')) == '' 
                 ? name 
                 : name.substring(0, name.indexOf('['))
+    }
+    private getOpction(opction:string) {
+        return opction.substring(opction.indexOf('[') + 1, opction.indexOf(']'))
     }
 }

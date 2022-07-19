@@ -1,11 +1,11 @@
-import { BoxGeometry, BufferGeometry, Material } from "three";
+import { BoxGeometry, BufferGeometry, Material, QuadraticBezierCurve } from "three";
 import * as THREE from 'three'
-export class Instance {
+export default class InstanceBox {
     public readonly code: number
     private material:Material | Array<Material>
     private amount:number
     private mesh
-    private geometry:THREE.BoxGeometry = new THREE.BoxGeometry(1, 1, 1)
+    private static geometry:THREE.BoxGeometry = new THREE.BoxGeometry(1, 1, 1)
     private count = 0;
     constructor(
         code: number,
@@ -15,7 +15,7 @@ export class Instance {
         this.code = code
         this.material = material == null ? new THREE.MeshStandardMaterial({ color: 0xFF00FF }) : material
         this.amount = amount + 1
-        this.mesh = new THREE.InstancedMesh( new BoxGeometry(1, 1, 1), this.material, this.amount );
+        this.mesh = new THREE.InstancedMesh( InstanceBox.geometry, this.material, this.amount );
     }
 
     render(pos:THREE.Vector3, scene:THREE.Scene) {

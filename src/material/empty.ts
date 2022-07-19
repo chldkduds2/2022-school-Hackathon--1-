@@ -1,4 +1,5 @@
 export default [
     "air",
-    "barrier"
+    "barrier",
+    "ladder"
 ]

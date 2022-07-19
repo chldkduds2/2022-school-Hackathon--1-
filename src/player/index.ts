@@ -19,9 +19,10 @@ export default class SetModel {
     private _scene:THREE.Scene;
 
     private counter = 0;
-
-
     private checker:Checker
+
+    private previousLocation:THREE.Vector3 = new THREE.Vector3()
+
     constructor(
         scene: THREE.Scene, 
         camera: THREE.Camera, 
@@ -123,9 +124,10 @@ export default class SetModel {
         const state = this._state
 
         // true가 2개 이상일 때 속도 변경
-        const speed = state.filter(e => true === e).length > 1 ? 0.2 : 0.5;
+        const speed = state.filter(e => true === e).length > 1 ? 0.35 : 0.5;
 
         const collusion:Array<boolean> = this.checker.update(this._camera.position)
+        console.log(collusion)
 
         if (state[0]) {
             this.pointerLockControl.moveForward(speed)
@@ -139,18 +141,59 @@ export default class SetModel {
         if (state[3]) {
             this.pointerLockControl.moveForward(-speed)
         }
-        if (state[4]) {
+        if (state[4] && collusion[4]) {
             this._camera.position.y += speed
         }
         if (state[5] || collusion[5]) {
+            // this._camera.position.y -= speed
             this._camera.position.y -= 0.1
         }
 
+
+        this.pos = this._camera.position
+        // collusion
+        // x좌표, -x, +z,-z
+        // 로 가면 막힘
+
+        // console.log(this._camsera.position)
+
+        // 아래 if 문에 들어갔을 때 state를 false해서 값을 저장하지 않고,
+        // 안 들어가면 전의 위치 저장,
+        // if문에 들어가면 저장된 위치로 카메라 이동
+        // 왜인진 모르겠는데 안 됐음
+
+        // let flag = true;
+
+        // moveForward이기 때문에 x,z 는 비교해서 처리
+        if (!collusion[0]){
+            this._camera.position.x -= speed
+            // this._camera.position.x = this.previousLocation.x
+            // flag = false
+        } 
+        if (!collusion[1]){
+            this._camera.position.x += speed
+            // this._camera.position.x = this.previousLocation.x
+            // flag = false
+        }
+        if (!collusion[2]){
+            this._camera.position.z -= speed
+            // this._camera.position.z = this.previousLocation.z
+            // flag = false
+        }
+        if (!collusion[3]){
+            this._camera.position.z += speed
+            // this._camera.position.z = this.previousLocation.z
+            // flag = false
+        }
+        
+        
         this._model.position.x = this._camera.position.x
         this._model.position.y = this._camera.position.y - 1
         this._model.position.z = this._camera.position.z;
-
-        this.pos = this._camera.position
         
+        // if (flag){
+        //     this.previousLocation = this._camera.position
+        //     console.log("save",this.previousLocation)
+        // }
     }
 }

@@ -3,6 +3,7 @@ import { Vector3 } from 'three'
 import World from '../world'
 import empty from '../material/empty'
 export default class Checker {
+    // private gap:number =
     private world:World
     constructor(world:World){
         this.world = world
@@ -11,10 +12,10 @@ export default class Checker {
     public update(pos:THREE.Vector3):Array<boolean> {
         pos = new THREE.Vector3(Math.floor(pos.x), Math.floor(pos.z), Math.floor(pos.y))
         return [
-            this.possable(this.world.map.get(new Vector3(pos.x + 1, pos.y, pos.z))),
-            this.possable(this.world.map.get(new Vector3(pos.x - 1, pos.y, pos.z))),
-            this.possable(this.world.map.get(new Vector3(pos.x, pos.y + 1, pos.z))),
-            this.possable(this.world.map.get(new Vector3(pos.x, pos.y - 1, pos.z))),
+            this.possable(this.world.map.get(new Vector3(Math.floor(pos.x + 1), Math.floor(pos.y), Math.floor(pos.z-1)))),
+            this.possable(this.world.map.get(new Vector3(pos.x - 1, pos.y, pos.z-1))),
+            this.possable(this.world.map.get(new Vector3(pos.x, pos.y + 1, pos.z-1))),
+            this.possable(this.world.map.get(new Vector3(pos.x, pos.y - 1, pos.z-1))),
             this.possable(this.world.map.get(new Vector3(pos.x, pos.y, pos.z + 1))),
             this.possable(this.world.map.get(new Vector3(pos.x, pos.y, pos.z - 2)))
         ]

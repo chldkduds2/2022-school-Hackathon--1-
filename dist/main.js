@@ -19,8 +19,5 @@ function showSlides() {
 }
 
 function onClick(){
-    fetch().then(() => {
-        
-    })
     window.location.href = window.location.href + "dgsw.html"
 }

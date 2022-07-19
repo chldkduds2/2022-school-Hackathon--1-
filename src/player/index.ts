@@ -3,8 +3,10 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
 import Checker from './Checker'
 import World from '../world'
+import { Vector2 } from 'three'
 
 export default class SetModel {
+    public pos:THREE.Vector3
     private _camera: THREE.Camera
     private _divContainer: HTMLElement
     private _modal: HTMLElement
@@ -33,6 +35,8 @@ export default class SetModel {
         this.pointerLockControl = new PointerLockControls(this._camera, this._divContainer)
         this.checker = new Checker(world)
         const loader = new GLTFLoader()
+        this.pos = new THREE.Vector3(0, 17, 1)
+
         // loader.load(
         //     'assets/scene.gltf',
         //     (gltf) => {
@@ -142,12 +146,11 @@ export default class SetModel {
             this._camera.position.y -= 0.1
         }
 
-
-
         this._model.position.x = this._camera.position.x
         this._model.position.y = this._camera.position.y - 1
         this._model.position.z = this._camera.position.z;
 
+        this.pos = this._camera.position
         
     }
 }

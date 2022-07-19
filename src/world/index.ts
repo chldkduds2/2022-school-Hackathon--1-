@@ -85,6 +85,7 @@ export default class World {
                     }
                 }
             }
+            console.log(`${z + 1} / ${this.size.z}`)
         }
     }
     private loadData(fileName:string): any {

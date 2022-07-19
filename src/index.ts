@@ -21,7 +21,7 @@ light.addLight(scene)
     renderer.render(scene, camera)
 })()
 
-axios.get('/small.json')
+axios.get('/core.json')
 .then((response) => {
     const world:World = new World(response.data)
     world.loadAsync().then(() => {

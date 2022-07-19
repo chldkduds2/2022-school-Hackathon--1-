@@ -3,12 +3,14 @@ import * as THREE from 'three'
 class Camera extends THREE.PerspectiveCamera{
 	constructor (FOV: number, size: number) {
 		super(FOV, size, 1, 1000)
-		this.position.y = 15
-		this.position.x = -5
+		// this.position.y = 15
+		// this.position.x = -5
+		// this.position.z = 100
+		this.position.z = -100
 		this.fov = 50
 		this.near = 0.05
 		this.far = 500
-		this.lookAt(0, 0, 0)
+		this.lookAt(0, 0, 100)
 		
 		this.updateProjectionMatrix()
 	}

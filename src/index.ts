@@ -26,6 +26,7 @@ axios.get('/dormitory.json')
     const world:World = new World(response.data)
     world.loadAsync().then(() => {
         world.render(scene)
+        console.log("END")
     })
 })
 .catch(error => {

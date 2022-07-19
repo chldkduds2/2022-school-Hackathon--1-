@@ -10,12 +10,15 @@ export default class InstanceLadder {
         amount:number,
     ) {
         this.amount = amount + 1
+        console.log(this.amount)
         const textureLoader = new THREE.TextureLoader()
         const texture = textureLoader.load("/texture/assets/minecraft/textures/block/ladder.png")
+        texture.magFilter = THREE.NearestFilter
         this.material = new THREE.MeshBasicMaterial({
             map: texture,
-            transparent: true
+            side: THREE.DoubleSide
         })
+        this.material
         this.mesh = new THREE.InstancedMesh( InstanceLadder.geometry, this.material, this.amount );
     }
 
@@ -25,9 +28,9 @@ export default class InstanceLadder {
             const temp = element.split('=')
             optionMap.set(temp[0], temp[1])
         })
-        console.log(optionMap.get("facing"))
+        // console.log(optionMap.get("facing"))
         const matrix = new THREE.Matrix4();
-        matrix.setPosition( pos.x, pos.y, pos.z );
+        matrix.setPosition( pos.x, pos.y, pos.z + 0.2);
         this.mesh.setMatrixAt( this.count, matrix );
         this.count++
         scene.add( this.mesh )

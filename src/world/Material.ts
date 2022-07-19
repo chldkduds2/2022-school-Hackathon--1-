@@ -49,7 +49,7 @@ export default class Material {
                     this.structure.textures[element] = Material.removeString(this.structure.textures[element], "minecraft:")
                 }
                 let textureArray
-                switch (origin) {
+                switch (this.origin) {
                     case "cross": textureArray = Material.cross; break;
                     default: textureArray = Material.block
                 }

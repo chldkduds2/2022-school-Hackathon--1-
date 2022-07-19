@@ -7,7 +7,7 @@ import Deployable from '../mesh/Deployable'
 
 import empty from '../material/empty'
 import InstanceLadder from '../instance/instanceLadder'
-import { unwatchFile } from 'fs'
+
 export default class World {
     public worldInfo:any
     public map:MapInfo
@@ -32,21 +32,29 @@ export default class World {
         let ladder = 0
         this.worldInfo.palette.forEach((element:any) => {
             if(element[1].name.includes("ladder"))
-                ladder++
-            if(element[1].name.includes("ladder"))
-                console.log(this.getOpction(element[1].name))
+                ladder+=element[1].count
         })
         this.specialInstance.set("ladder", new InstanceLadder(ladder))
+        this.worldInfo.unexist.forEach((element:string) => {
+            empty.push(element.substring(6))
+        })
+        console.log(this.worldInfo.unexist)
     }
     public loadAsync():Promise<void> {
         return new Promise((resolve, reject) => {
             Promise.all(this.worldInfo.palette.map(async (element:any) => {
-                this.materialInfo.set(element[0], new MaterialInfo(element[0], element[1].name, this.loadTextureStructure('block/' + this.removeOpction(element[1].name))))
+                this.materialInfo.set(element[0], new MaterialInfo(element[0], element[1].name, 
+                    this.loadTextureStructure('block/' + this.removeOpction(element[1].name))))
                 await this.materialInfo.get(element[0])?.setMaterial()
             })).then(() => {
                 this.worldInfo.palette.forEach((element: any) => {
                     if(element[1].count > 4 && !empty.includes(this.removeOpction(element[1].name)))
                         this.instances.set(element[0], new Instance(element[0], this.materialInfo.get(element[0])?.material, element[1].count))
+                })
+                this.materialInfo.forEach((value:MaterialInfo, key:number) => {
+                    if(value.material == null) {
+                        empty.push(this.removeOpction(value.name))
+                    }
                 })
                 resolve()
             })

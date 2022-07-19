@@ -1,32 +1,43 @@
-// import { BoxGeometry, BufferGeometry, Material } from "three";
+// import { BoxGeometry, BufferGeometry, Material, QuadraticBezierCurve } from "three";
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 // import * as THREE from 'three'
-// export default class InstanceBed {
-//     public readonly code: number
-//     private material:Material | Array<Material>
+// export default class InstanceLadder {
+//     private material:Material
 //     private amount:number
 //     private mesh
-//     private static geometry:THREE.BoxGeometry = new THREE.BoxGeometry(1, 1, 1)
+//     private static geometry:THREE.PlaneGeometry = new THREE.BoxGeometry(1, 1, 1)
 //     private count = 0;
-//     private opction:Map<string, string> = new Map()
+    
 //     constructor(
-//         code: number,
-//         material:Material | Array<Material> | null | undefined,
 //         amount:number,
-//         opction:string
 //     ) {
-//         this.code = code
-//         this.material = material == null ? new THREE.MeshStandardMaterial({ color: 0xFF00FF }) : material
 //         this.amount = amount + 1
-//         opction.substring(1, opction.length - 2).split(',').forEach((element) => {
-//             const temp = element.split('=')
-//             this.opction.set(temp[0], temp[1])
+//         console.log(this.amount)
+//         const textureLoader = new THREE.TextureLoader()
+//         const gltfLoader = new GLTFLoader()
+        
+//         texture.magFilter = THREE.NearestFilter
+//         this.material = new THREE.MeshBasicMaterial({
+//             map: texture,
+//             side: THREE.DoubleSide
 //         })
-//         this.mesh = new THREE.InstancedMesh( InstanceBox.geometry, this.material, this.amount );
+//         this.material
+//         this.mesh = new THREE.InstancedMesh( InstanceLadder.geometry, this.material, this.amount );
+//     }
+//     load():Promise<void> {
+//         return new Promise((resolve, result) => [
+            
+//         ])
 //     }
 
-//     render(pos:THREE.Vector3, scene:THREE.Scene) {
+//     render(pos:THREE.Vector3, option:string, scene:THREE.Scene) {
+//         const optionMap = new Map()
+//         option.split(',').forEach((element) => {
+//             const temp = element.split('=')
+//             optionMap.set(temp[0], temp[1])
+//         })
 //         const matrix = new THREE.Matrix4();
-//         matrix.setPosition( pos.x, pos.y, pos.z );
+//         matrix.setPosition( pos.x, pos.y, pos.z + 0.2);
 //         this.mesh.setMatrixAt( this.count, matrix );
 //         this.count++
 //         scene.add( this.mesh )

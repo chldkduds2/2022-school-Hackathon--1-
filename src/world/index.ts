@@ -51,6 +51,9 @@ export default class World {
                     const color:number = this.map.get(pos)
                     const info = this.materialInfo.get(color)
                     if(!empty.includes(info!.name)) {
+                        if(info!.name.includes("bed")) {
+                            console.log(info!.name)
+                        }
                         if(this.instances.has(color)) {
                             this.instances.get(color)?.render(new THREE.Vector3(x, z + 1, y), scene)
                         }
@@ -64,7 +67,6 @@ export default class World {
             }
         }
     }
-    
     private loadData(fileName:string): any {
         return this.datas.get(fileName)
     }

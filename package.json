@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "prismarine-nbt": "^2.2.1",
+    "prismarine-schematic": "^1.2.3"
   }
 }

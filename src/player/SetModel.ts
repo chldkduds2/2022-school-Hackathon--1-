@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls"
-import { Camera } from '../core';
 
 
 export default class SetModel{

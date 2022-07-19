@@ -119,9 +119,10 @@ export default class SetModel {
         const state = this._state
 
         // true가 2개 이상일 때 속도 변경
-        const speed = state.filter(e => true === e).length > 1 ? 0.2 : 0.5;
+        const speed = state.filter(e => true === e).length > 1 ? 0.35 : 0.5;
 
         const collusion:Array<boolean> = this.checker.update(this._camera.position)
+        console.log(collusion)
 
         if (state[0]) {
             this.pointerLockControl.moveForward(speed)
@@ -135,13 +136,20 @@ export default class SetModel {
         if (state[3]) {
             this.pointerLockControl.moveForward(-speed)
         }
-        if (state[4]) {
+        if (state[4] && collusion[4]) {
             this._camera.position.y += speed
         }
         if (state[5] || collusion[5]) {
+            // this._camera.position.y -= speed
             this._camera.position.y -= 0.1
         }
 
+        console.log(this._camera.position)
+
+        // moveForward이기 때문에 x,z 는 비교해서 처리
+        if (!collusion[1]){
+            this._camera.position
+        }
 
 
         this._model.position.x = this._camera.position.x

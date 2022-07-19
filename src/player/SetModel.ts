@@ -12,7 +12,11 @@ export default class SetModel {
 
     private _model: THREE.Group = new THREE.Group()
 
+    private _scene:THREE.Scene;
+
     constructor(scene: THREE.Scene, camera: THREE.Camera, divContainer: HTMLElement) {
+        // 레이케스터
+        this._scene = scene
         this._camera = camera
         this._divContainer = divContainer
         this._modal = document.getElementById('modal')!
@@ -52,6 +56,8 @@ export default class SetModel {
         window.addEventListener('keyup', (e) => {
             this.changeFalse(e.keyCode)
         })
+
+
     }
 
     changeTrue(keyCode:number){
@@ -98,41 +104,6 @@ export default class SetModel {
 
 
 
-    // changeState(keyCode: number, down:boolean) {
-    //     if (keyCode == 119 || keyCode == 87) {
-    //         if (down){
-    //             this._state[0] = true;
-    //         } else {
-    //             this._state[0] = false;
-    //         }
-    //         this._state[1] = !this._state[1]
-    //     }
-    //     if (keyCode == 65 || keyCode == 97) {
-    //         // a
-    //         if (down){
-    //             this._state[0] = true;
-    //         } else {
-    //             this._state[1] = false;
-    //         }
-    //         // this._state[1] = !this._state[1]
-    //     }
-    //     if (keyCode == 68 || keyCode == 100) {
-    //         // d
-    //         // this._state[2] = !this._state[2]
-    //     }
-    //     if (keyCode == 83 || keyCode == 115) {
-    //         //s
-    //         // this._state[3] = !this._state[3]
-    //     }
-    //     if (keyCode == 32) {
-    //         // space
-    //         // this._state[4] = !this._state[4]
-    //     }
-    //     if (keyCode == 16) {
-    //         // shitf
-    //         // this._state[5] = !this._state[5]
-    //     }
-    // }
 
     update() {
         const state = this._state
@@ -162,9 +133,8 @@ export default class SetModel {
 
         this._model.position.x = this._camera.position.x
         this._model.position.y = this._camera.position.y - 1
-        // this._model.position.z = this._camera.position.z - 0.5;
         this._model.position.z = this._camera.position.z;
 
-        
+
     }
 }

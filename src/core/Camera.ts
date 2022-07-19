@@ -6,7 +6,8 @@ class Camera extends THREE.PerspectiveCamera{
 		// this.position.y = 15
 		// this.position.x = -5
 		// this.position.z = 100
-		this.position.z = -100
+		this.position.y = 17
+		this.position.z = 1
 		this.fov = 50
 		this.near = 0.05
 		this.far = 500

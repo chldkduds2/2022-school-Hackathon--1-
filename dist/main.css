@@ -1,0 +1,305 @@
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0; display: flex; flex-direction: column; align-items: center;}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+
+
+
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #ffffff;
+  font-size: 50px;
+  position: absolute;
+  margin-top: 70px;
+  margin-left: 100PX;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  margin-top: 50px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  margin-left: 40px;
+}
+
+.active, .dot:hover {
+  background-color: rgb(29, 32, 136);
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+.all{
+  position: relative;
+  width: 90%;
+}
+
+
+.i{
+width: 100%;
+border-radius: 50px;
+  
+}
+
+  .lo{
+    width: 10%;
+  }
+
+  .head{
+ justify-content: center;
+ align-items: center;
+ display: flex;
+ margin-left: 85px;
+ margin-top: -150px;
+  }
+
+  h1{
+   font-size: 100px;
+    margin-left: 500px;
+    font-family: 'Do Hyeon', sans-serif;
+  }
+
+.alldot{
+
+}
+.headimg{
+width: 100%;
+height: 50%;
+margin-top: -800px;
+
+}
+
+.font{
+ position: relative;
+ margin-top: -5500px;
+ width: 2000px;
+ margin-left: 4500px;
+}
+@keyframes up-down{
+    from{
+      transform: translatey(0px);
+    }
+    to{
+      transform: translatey(-20px);
+    }
+  }
+  .top_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 80px;
+    margin-bottom: 100px;
+  }
+  .head_container {
+    width: 80%;
+    margin-right: 30px;
+    justify-content: space-between;
+    align-items: flex-end;
+    display: flex;
+  }
+  .head_image {
+    width: 100%;
+    animation: up-down 0.5s infinite ease-in-out alternate;
+  }
+  
+
+  .head_name {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 30px;
+    margin-top: 40px;
+    width: 100%;
+  }
+  .head_imgAndName {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 7%;
+  }
+
+  .head_imgAndName:last-child > .head_image{
+  position: relative;
+  top: 30px;
+  }
+
+  .body_container {
+    margin-top: 100px;
+    width:90%;
+    justify-content: space-between;
+    align-items: flex-end;
+    display: flex;
+  }
+  .body_image {
+    width: 100%;
+    animation: up-down 0.5s infinite ease-in-out alternate;
+  }
+  
+  .body_name {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 40px;
+    margin-top: 40px;
+  }
+  .body_imgAndName {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 13%;
+  }
+  .body_imgAndName:nth-child(1){width: 13.5%;}
+  .body_imgAndName:nth-child(2){width: 12%;}
+  .body_imgAndName:nth-child(3){width: 13.5%;}
+  .body_imgAndName:nth-child(4){width: 13%;}
+  .body_imgAndName:nth-child(5){width: 11.5%;}
+  .body_imgAndName:nth-child(6){width: 12.5%;}
+
+  .inf{
+    margin-top: 50px;
+    width: 95%;
+    height: 100%;
+  }
+
+
+@keyframes up-down2{
+    from{
+      transform: translatey(0px);
+    }
+    to{
+      transform: translatey(-50px);
+    }
+  }
+
+
+
+.ch{
+display: flex;
+height: 1100px;
+margin-top: 500px;
+margin-left: 400px;
+animation: up-down2 0.5s infinite ease-in-out alternate;
+
+
+
+}
+
+.head1{
+display: flex;
+margin-left: -160px;
+margin-top: 300px;
+
+}
+h2{
+    margin-left: 700px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 100px;
+    margin-top:100px;
+    margin-bottom:300px ;
+}    
+
+footer{
+  width:100%;
+  height:60vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+}
+
+.inputContainer > input {
+  border-radius: 15px;
+  height:50px;
+  font-size: x-large;
+  padding: 0px 15px;
+  /* border: noe; */
+  /* outline: none; */
+}
+
+.inputContainer > button{
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  cursor: pointer;
+  font-size: large;
+  /* outline: none; */
+}
+
+.inputContainer > button:hover{
+  font-weight: bold;
+}

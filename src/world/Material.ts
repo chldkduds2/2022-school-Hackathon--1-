@@ -1,13 +1,14 @@
 import * as THREE from "three"
 export default class Material {
     
-    // TEST extends Material | 
     public code:number
     public name:string
     public origin:string
+    public material: THREE.Material | Array<THREE.Material> | null = null
     private structure: strObj
-    private material: THREE.Material | Array<THREE.Material> | null = null
     private static loadedTexture:Map<string, THREE.Texture> = new Map()
+    private static readonly undexist:Array<string>
+
     private static readonly textureExtension:string = '.png'
     private static readonly textureDirectory:string = '/texture/assets/minecraft/textures/'
     private static readonly textureLoader = new THREE.TextureLoader()

@@ -48,6 +48,8 @@
 
 import * as THREE from 'three'
 import * as Core from './core'
+import axios from 'axios'
+import World from './world'
 
 export const container = document.getElementById('three-js container')!
 
@@ -59,6 +61,14 @@ const scene = new Core.Scene()
     requestAnimationFrame(main)
     renderer.render(scene, camera)
 })()
+
+axios.get('/dormitory.json')
+.then((response) => {
+    const world:World = new World(response.data)
+})
+.catch(error => {
+    console.log(error)
+})
 
 // const bedrock = new BedRock()
 // bedrock.render(scene)

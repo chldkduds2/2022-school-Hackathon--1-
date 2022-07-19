@@ -1,14 +1,11 @@
 import * as THREE from "three"
 export default class Material {
-    
     public code:number
     public name:string
     public origin:string
     public material: THREE.Material | Array<THREE.Material> | null = null
     private structure: strObj
     private static loadedTexture:Map<string, THREE.Texture> = new Map()
-    private static readonly undexist:Array<string>
-
     private static readonly textureExtension:string = '.png'
     private static readonly textureDirectory:string = '/texture/assets/minecraft/textures/'
     private static readonly textureLoader = new THREE.TextureLoader()
@@ -31,8 +28,15 @@ export default class Material {
     ) {
         this.code = code
         this.name = name
-        this.origin = structure.length > 1 ? Material.removeString(structure[structure.length - 2].parent, "minecraft:").substring(6) : ''
-        this.structure = Material.joinTexture(structure)
+        try {
+            this.origin = structure.length > 1 ? Material.removeString(structure[structure.length - 2].parent, "minecraft:").substring(6) : ''
+            this.structure = Material.joinTexture(structure)
+        }
+        catch(e) {
+            this.origin = ''
+            this.structure = structure
+        }
+        
     }
     public setMaterial():Promise<void> {
         return new Promise((resolve, reject) => {
@@ -70,6 +74,7 @@ export default class Material {
     }
     private async getMeshBasicMaterial(texture: string):Promise<THREE.MeshBasicMaterial> {
         const loadedTexture = await this.loadTexture(Material.removeString(texture, "minecraft:"))
+        loadedTexture.magFilter = THREE.NearestFilter
         return new THREE.MeshBasicMaterial({
             map: loadedTexture,
             transparent: true,

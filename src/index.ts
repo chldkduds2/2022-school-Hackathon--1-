@@ -56,6 +56,8 @@ export const container = document.getElementById('three-js container')!
 const camera = new Core.Camera(75, window.innerWidth / window.innerHeight)
 const renderer = new Core.Renderer(window.innerWidth, window.innerHeight, container)
 const scene = new Core.Scene()
+const light = new Core.Light()
+light.addLight(scene)
 
 ;(function main() {
     requestAnimationFrame(main)
@@ -65,6 +67,9 @@ const scene = new Core.Scene()
 axios.get('/dormitory.json')
 .then((response) => {
     const world:World = new World(response.data)
+    world.loadAsync().then(() => {
+        world.render(scene)
+    })
 })
 .catch(error => {
     console.log(error)

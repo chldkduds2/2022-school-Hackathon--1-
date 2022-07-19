@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { Material, Vector3 } from 'three'
 import Deployable from './Deployable'
 
-class DeployGeomerty implements Deployable {
+export default class DeployGeomerty implements Deployable {
     public _mesh: THREE.Mesh
 
     constructor(position: THREE.Vector3, material: THREE.Material | THREE.Material[] | null) {

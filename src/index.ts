@@ -17,6 +17,7 @@ light.addLight(scene)
 
 ;(function main() {
     requestAnimationFrame(main)
+    model.update()
     renderer.render(scene, camera)
 })()
 

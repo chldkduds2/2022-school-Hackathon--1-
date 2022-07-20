@@ -2,14 +2,13 @@ var socket = io.connect('http://49.50.165.17:3000', { // ws:// 를 안쓰고 htt
   path: '/socket.io', // 서버 path와 일치시켜준다
   transports: ['websocket']
 });
-var Name = "";
 $(function () {
   const btn = document.querySelector("#btn");
 
   // 서버로 자신의 정보를 전송한다.
   socket.emit("login", {
     // name: "ungmo2",
-    name: Name,
+    name: name,
     userid: "ungmo2@gmail.com",
   });
 

@@ -76,9 +76,10 @@ export default class SetModel {
 
         window.addEventListener('keydown', (e) => {
             this.changeTrue(e.keyCode)
-            if(e.key == "Escape") {
-                console.log(document.getElementById("chatting"))
+            if(e.key == "q" && document.getElementById("chatting")!.style.display == "block") {
                 document.getElementById("chatting")!.style.display = "none"
+                this.pointerLockControl.lock()
+                this._camera.position.set(42, 4, 100)
             }
         })
 
@@ -133,7 +134,7 @@ export default class SetModel {
         const state = this._state
 
         // true가 2개 이상일 때 속도 변경
-        const speed = state.filter(e => true === e).length > 1 ? 0.175 : 0.3;
+        const speed = state.filter(e => true === e).length > 1 ? 0.1 : 0.2;
 
         const collusion:Array<boolean> = this.checker.update(this._camera.position)
         // console.log(collusion)
@@ -193,6 +194,8 @@ export default class SetModel {
             Math.round(this._camera.position.z) == item[2]){
                 
                 console.log("문앞임")
+                this.pointerLockControl.unlock()
+                document.getElementById("chatting")!.style.display = "block"
 
             }
         })

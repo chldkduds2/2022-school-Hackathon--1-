@@ -12,7 +12,7 @@ axios.get('/core.json')
     const world:World = new World(response.data)
     console.log(response.data)
     world.loadAsync().then(() => {
-        const camera = new Core.Camera(75, window.innerWidth / window.innerHeight)
+        const camera = new Core.Camera(120, window.innerWidth / window.innerHeight)
         const renderer = new Core.Renderer(window.innerWidth, window.innerHeight, container)
         const scene = new Core.Scene()
         const light = new Core.Light()
@@ -27,8 +27,6 @@ axios.get('/core.json')
             renderer.render(scene, camera)
         })()
 
-        
-
         world.render(scene)
         console.log("END")
     })
@@ -36,3 +34,4 @@ axios.get('/core.json')
 .catch(error => {
     console.log(error)
 })
+

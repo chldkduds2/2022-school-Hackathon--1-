@@ -11,9 +11,8 @@ export default class Checker {
     }
     public update(pos:THREE.Vector3):Array<boolean> {
         // pos = new THREE.Vector3(pos.x, pos.z, Math.floor(pos.y))
-        pos = new THREE.Vector3(Math.round(pos.x), Math.round(pos.z), Math.round(pos.y))
+        pos = new THREE.Vector3(Math.floor(pos.x), Math.floor(pos.z), Math.floor(pos.y))
 
-        console.log(pos)
 
         return [
             this.possable(this.world.map.get(new Vector3(pos.x+1, pos.y, pos.z-1))),
@@ -31,6 +30,11 @@ export default class Checker {
         ]
     }
     private possable(code:number) {
-        return empty.includes(this.world.worldInfo.palette[code][1].name)
+        try {
+            return empty.includes(this.world.worldInfo.palette[code][1].name)
+        }
+        catch(e) {
+            return true
+        }
     }
 }

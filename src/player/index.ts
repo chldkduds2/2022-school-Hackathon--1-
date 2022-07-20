@@ -66,6 +66,10 @@ export default class SetModel {
 
         window.addEventListener('keydown', (e) => {
             this.changeTrue(e.keyCode)
+            if(e.key == "Escape") {
+                console.log(document.getElementById("chatting"))
+                document.getElementById("chatting")!.style.display = "none"
+            }
         })
 
         window.addEventListener('keyup', (e) => {

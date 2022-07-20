@@ -91,9 +91,6 @@ export default class SetModel {
         if (keyCode == 32) {
             this._state[4] = true;
         }
-        if (keyCode == 16) {
-            this._state[5] = true;
-        }
     }
 
     changeFalse(keyCode:number){
@@ -112,9 +109,6 @@ export default class SetModel {
         if (keyCode == 32) {
             this._state[4] = false;
         }
-        if (keyCode == 16) {
-            this._state[5] = false;
-        }
     }
 
 
@@ -127,7 +121,9 @@ export default class SetModel {
         const speed = state.filter(e => true === e).length > 1 ? 0.175 : 0.3;
 
         const collusion:Array<boolean> = this.checker.update(this._camera.position)
-        // console.log(collusion)
+        console.log(collusion)
+
+        let minY = 0;
 
         if (state[0]) {
             this.pointerLockControl.moveForward(speed)
@@ -144,10 +140,16 @@ export default class SetModel {
         if (state[4] && collusion[4]) {
             this._camera.position.y += speed
         }
-        if (state[5] || collusion[5]) {
-            // this._camera.position.y -= speed
+        if (collusion[5]){
             this._camera.position.y -= 0.1
         }
+        // if (state[5] && collusion[5]) {
+        //     minY -= 0.1
+        // }
+
+
+
+        
 
 
         this.pos = this._camera.position

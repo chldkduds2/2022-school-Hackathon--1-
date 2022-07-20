@@ -76,6 +76,7 @@ export default class SetModel {
 
         window.addEventListener('keydown', (e) => {
             this.changeTrue(e.keyCode)
+            console.log(e.key)
             if(e.key == "q" && document.getElementById("chatting")!.style.display == "block") {
                 document.getElementById("chatting")!.style.display = "none"
                 this.pointerLockControl.lock()
@@ -184,9 +185,9 @@ export default class SetModel {
         // console.log(this._camera.position)
 
         // 카메라 위치로 방 입장 확인
-        console.log("x",Math.round(this._camera.position.x))
-        console.log("y",Math.round(this._camera.position.y))
-        console.log("z",Math.round(this._camera.position.z))
+        // console.log("x",Math.round(this._camera.position.x))
+        // console.log("y",Math.round(this._camera.position.y))
+        // console.log("z",Math.round(this._camera.position.z))
         
         this.chatPosition.map((item) => {
             if (Math.round(this._camera.position.x) == item[0] &&

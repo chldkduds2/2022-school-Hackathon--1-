@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3000', { // ws:// 를 안쓰고 http를 쓴다
+var socket = io.connect('http://49.50.165.17:3000', { // ws:// 를 안쓰고 http를 쓴다
   path: '/socket.io', // 서버 path와 일치시켜준다
   transports: ['websocket']
 });

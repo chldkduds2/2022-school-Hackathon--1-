@@ -10,7 +10,7 @@ export default class Communication {
     constructor(myname:string, player:Player, scene:Scene) {
         this.name = myname
         this.player = player
-        this.socket = io('http://localhost:3000', {
+        this.socket = io('http://49.50.165.17:3000', {
             path: '/socket.io',
             transports: ['websocket']
         });

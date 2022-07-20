@@ -21,7 +21,17 @@ export default class SetModel {
     private counter = 0;
     private checker:Checker
 
-    private previousLocation:THREE.Vector3 = new THREE.Vector3()
+
+    // x 를 - 했을 때 나가기
+    // x 를 + 했을 때 들어가기
+    // 46, 4, 116
+    // 38, 127, 3
+    // 46, 139, 3
+    // 38, 140, 3
+    // 46, 150, 3
+    // 38, 153, 3
+
+    private chatPosition = [[46, 4, 116],[38, 4, 127],[46, 4, 139],[38, 4, 140],[46, 4, 150],[38, 4, 153]]
 
     constructor(
         scene: THREE.Scene, 
@@ -161,17 +171,28 @@ export default class SetModel {
         if (!collusion[3]){
             this._camera.position.z += speed
         }
-
-        // x 를 - 했을 때 나가기
-        // x 를 + 했을 때 들어가기
-        // 46, 116, 3
-
-
-        
         
         this._model.position.x = this._camera.position.x
         this._model.position.y = this._camera.position.y - 1
         this._model.position.z = this._camera.position.z;
+
+        // console.log(this._camera.position)
+
+        // 카메라 위치로 방 입장 확인
+        console.log("x",Math.round(this._camera.position.x))
+        console.log("y",Math.round(this._camera.position.y))
+        console.log("z",Math.round(this._camera.position.z))
+        
+        this.chatPosition.map((item) => {
+            if (Math.round(this._camera.position.x) == item[0] &&
+            Math.round(this._camera.position.y) == item[1] && 
+            Math.round(this._camera.position.z) == item[2]){
+                
+                console.log("문앞임")
+
+            }
+        })
+
 
     }
 }

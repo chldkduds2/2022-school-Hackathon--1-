@@ -124,7 +124,7 @@ export default class SetModel {
         const state = this._state
 
         // true가 2개 이상일 때 속도 변경
-        const speed = state.filter(e => true === e).length > 1 ? 0.35 : 0.5;
+        const speed = state.filter(e => true === e).length > 1 ? 0.175 : 0.3;
 
         const collusion:Array<boolean> = this.checker.update(this._camera.position)
         // console.log(collusion)

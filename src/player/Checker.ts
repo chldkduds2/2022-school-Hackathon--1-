@@ -13,7 +13,7 @@ export default class Checker {
         pos = new THREE.Vector3(pos.x, pos.z, Math.floor(pos.y))
         // pos = new THREE.Vector3(Math.floor(pos.x), Math.floor(pos.z), Math.floor(pos.y))
 
-        console.log(pos)
+        // console.log(pos)
 
         return [
             this.possable(this.world.map.get(new Vector3(Math.floor(pos.x+0.2), Math.floor(pos.y), pos.z-1))),

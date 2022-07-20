@@ -11,7 +11,7 @@ export default class Checker {
     }
     public update(pos:THREE.Vector3):Array<boolean> {
         // pos = new THREE.Vector3(pos.x, pos.z, Math.floor(pos.y))
-        pos = new THREE.Vector3(Math.floor(pos.x), Math.floor(pos.z), Math.floor(pos.y))
+        pos = new THREE.Vector3(Math.round(pos.x), Math.round(pos.z), Math.round(pos.y))
 
         console.log(pos)
 

@@ -121,7 +121,7 @@ export default class SetModel {
         const speed = state.filter(e => true === e).length > 1 ? 0.175 : 0.3;
 
         const collusion:Array<boolean> = this.checker.update(this._camera.position)
-        console.log(collusion)
+        // console.log(collusion)
 
         let minY = 0;
 

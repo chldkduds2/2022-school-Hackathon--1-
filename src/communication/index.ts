@@ -22,8 +22,11 @@ export default class Communication {
             this.others.set(data.name, new Dummy(scene, data.name))
         });
         this.socket.on("all", (data) => {
-            console.log(data)
-            this.others.set(data.name, new Dummy(scene, data.name))
+            console.log(data.names)
+            data.names.forEach((element:any) => [
+                this.others.set(element, new Dummy(scene, element))
+            ])
+            // this.others.set(data.name, new Dummy(scene, data.name))
         });
         this.socket.on("move", (data) => {
             this.others.get(data.name)?.update(data.pos)

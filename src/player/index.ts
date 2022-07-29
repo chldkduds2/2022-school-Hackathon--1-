@@ -10,6 +10,8 @@ export default class SetModel {
     private _camera: THREE.Camera
     private _divContainer: HTMLElement
     private _modal: HTMLElement
+    private _chatting : HTMLElement
+
     private pointerLockControl
 
     private _state = [false, false, false, false, false, false]
@@ -20,6 +22,7 @@ export default class SetModel {
 
     private counter = 0;
     private checker:Checker
+
 
 
     // x 를 - 했을 때 나가기
@@ -43,6 +46,8 @@ export default class SetModel {
         this._camera = camera
         this._divContainer = divContainer
         this._modal = document.getElementById('modal')!
+        this._chatting = document.getElementById('chatting')!
+
         this.pointerLockControl = new PointerLockControls(this._camera, this._divContainer)
         this.checker = new Checker(world)
         const loader = new GLTFLoader()
@@ -77,12 +82,13 @@ export default class SetModel {
         window.addEventListener('keydown', (e) => {
             this.changeTrue(e.keyCode)
             console.log(e.key)
-            if(e.key == "q" && document.getElementById("chatting")!.style.display == "block") {
-                document.getElementById("chatting")!.style.display = "none"
+            if(e.key == "q" && this._chatting!.style.display == "block") {
+                this._chatting!.style.display = "none"
                 this.pointerLockControl.lock()
                 this._camera.position.set(42, 4, 100)
             }
         })
+
 
         window.addEventListener('keyup', (e) => {
             this.changeFalse(e.keyCode)
